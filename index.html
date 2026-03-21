@@ -1476,8 +1476,45 @@
     updateCounts();
   }
 
+  // ── MIGRATION: convert old localStorage key formats to current ──
+  function migrateLocalStorage() {
+    if (localStorage.getItem('se_migrated_v3')) return;
+    // Map: all rids in order across tables
+    const ALL_RIDS = [
+      'a0','a1','a2','a3','a4','a5','a6','a7',   // tbl-a (8 rows)
+      'b0','b1','b2','b3','b4','b5','b6','b7','b8', // tbl-b (9 rows)
+      'c0','c1','c2','c3','c4','c5'                // tbl-c (6 rows)
+    ];
+    const TBL_FOR = {
+      a:['tbl-a',8], b:['tbl-b',9], c:['tbl-c',6]
+    };
+    ALL_RIDS.forEach((newRid, globalIdx) => {
+      const tblId = 'tbl-' + newRid[0];
+      const localIdx = parseInt(newRid.slice(1));
+      const oldKeys = [
+        `${globalIdx}`,           // original global index
+        `${tblId}_${localIdx}`    // intermediate table_index format
+      ];
+      oldKeys.forEach(old => {
+        const oldStatus = localStorage.getItem('status_' + old);
+        if (oldStatus && !localStorage.getItem('status_' + newRid))
+          localStorage.setItem('status_' + newRid, oldStatus);
+        ['task','owner','deadline','notes'].forEach(f => {
+          const v = localStorage.getItem(`cell_${old}_${f}`);
+          if (v !== null && localStorage.getItem(`cell_${newRid}_${f}`) === null)
+            localStorage.setItem(`cell_${newRid}_${f}`, v);
+        });
+        const del = localStorage.getItem('del_' + old);
+        if (del && !localStorage.getItem('del_' + newRid))
+          localStorage.setItem('del_' + newRid, del);
+      });
+    });
+    localStorage.setItem('se_migrated_v3', '1');
+  }
+
   // ── INIT ────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
+    migrateLocalStorage();
     TABLE_IDS.forEach(initTable);
     updateCounts();
     // Facebook members (if configured)
