@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StealthEnomics Founders Hub — Action Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #001A35;
+    --navy2: #0F2952;
+    --blue: #1975BB;
+    --blue2: #4670AF;
+    --light-blue: #DEECFA;
+    --mid-blue: #90BFED;
+    --lime: #B3C234;
+    --lime2: #d4e44a;
+    --white: #FFFFFF;
+    --gray: #F5F7FA;
+    --text: #1A1A2E;
+    --muted: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    border-bottom: 3px solid var(--lime);
+    padding: 32px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .header-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--lime);
+    border-radius: 50%;
+  }
+
+  .header-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .header-sub {
+    font-size: 12px;
+    color: var(--mid-blue);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  .header-badge {
+    background: var(--lime);
+    color: var(--navy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 64px 48px 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--lime);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .hero-title span {
+    color: var(--lime);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--mid-blue);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--lime);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--mid-blue);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    background: var(--navy2);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 48px;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-tabs::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--mid-blue);
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 16px 24px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .tab-btn:hover {
+    color: var(--white);
+  }
+
+  .tab-btn.active {
+    color: var(--lime);
+    border-bottom-color: var(--lime);
+    font-weight: 600;
+  }
+
+  /* SECTIONS */
+  .section {
+    display: none;
+    padding: 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--mid-blue);
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  /* PHASE HEADER */
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 36px 0 16px;
+  }
+
+  .phase-label {
+    background: var(--navy2);
+    border: 1px solid var(--blue2);
+    color: var(--mid-blue);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .phase-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .phase-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  /* TASK TABLE */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+
+  .task-table th {
+    background: var(--navy2);
+    color: var(--mid-blue);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .task-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  .task-table tr:hover td {
+    background: rgba(255,255,255,0.03);
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+
+  .status-done { background: rgba(34,197,94,0.15); color: #4ade80; }
+  .status-progress { background: rgba(251,191,36,0.15); color: #fbbf24; }
+  .status-todo { background: rgba(148,163,184,0.1); color: #94a3b8; }
+  .status-blocked { background: rgba(239,68,68,0.15); color: #f87171; }
+
+  .owner-tag {
+    background: rgba(25,117,187,0.2);
+    color: var(--mid-blue);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  .deadline-tag {
+    color: var(--mid-blue);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .note-text {
+    color: var(--muted);
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  /* CONTENT CALENDAR */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .day-card {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .day-card:hover {
+    border-color: var(--blue2);
+  }
+
+  .day-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--lime);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .day-time {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .day-post {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .day-tag {
+    display: inline-block;
+    background: rgba(25,117,187,0.2);
+    color: var(--mid-blue);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+
+  .day-action {
+    font-size: 11px;
+    color: var(--lime);
+    font-weight: 500;
+  }
+
+  .week-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin: 28px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .week-num {
+    background: var(--lime);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* ROLES */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .role-card {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .role-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .role-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .role-title {
+    font-size: 12px;
+    color: var(--mid-blue);
+    margin-top: 2px;
+  }
+
+  .role-time {
+    display: inline-block;
+    background: rgba(179,194,52,0.15);
+    color: var(--lime);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-top: 8px;
+  }
+
+  .role-tasks {
+    list-style: none;
+    padding: 16px 20px;
+  }
+
+  .role-tasks li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+
+  .role-tasks li:last-child { border-bottom: none; }
+
+  .task-freq {
+    background: var(--navy);
+    color: var(--mid-blue);
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* GROWTH ROADMAP */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .phase-card {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .phase-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--blue2);
+  }
+
+  .phase-card-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .phase-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mid-blue);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .phase-focus {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .phase-time {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .phase-card-body {
+    padding: 16px 20px;
+  }
+
+  .phase-actions {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .phase-actions li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .phase-actions li::before {
+    content: '→';
+    color: var(--blue2);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .phase-milestone {
+    background: rgba(179,194,52,0.08);
+    border: 1px solid rgba(179,194,52,0.2);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+
+  .phase-milestone-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--lime);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .phase-milestone-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+
+  /* METRICS TABLE */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .metric-cell {
+    background: var(--navy2);
+    padding: 14px 16px;
+    text-align: center;
+  }
+
+  .metric-cell.header {
+    background: var(--navy);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mid-blue);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .metric-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    text-align: left;
+    padding: 14px 16px;
+  }
+
+  .metric-val {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--lime);
+  }
+
+  .metric-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* INFO BOX */
+  .info-box {
+    display: flex;
+    gap: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .info-label {
+    background: var(--navy);
+    color: var(--mid-blue);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 120px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .info-text {
+    background: var(--navy2);
+    color: rgba(255,255,255,0.85);
+    font-size: 13px;
+    padding: 14px 18px;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  /* BUDGET */
+  .budget-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .budget-card {
+    background: var(--navy2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .budget-amount {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--lime);
+  }
+
+  .budget-item {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .budget-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: var(--navy2);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 48px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer strong {
+    color: var(--mid-blue);
+  }
+
+  @media (max-width: 768px) {
+    .header, .nav-tabs, .section { padding-left: 20px; padding-right: 20px; }
+    .hero { padding: 40px 20px 32px; }
+    .hero-title { font-size: 34px; }
+    .week-grid { grid-template-columns: 1fr 1fr; }
+    .roadmap { grid-template-columns: 1fr 1fr; }
+    .role-grid { grid-template-columns: 1fr; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .budget-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-brand">
+    <div class="header-dot"></div>
+    <div>
+      <div class="header-title">StealthEnomics Founders Hub</div>
+      <div class="header-sub">Community Action Plan</div>
+    </div>
+  </div>
+  <div class="header-badge">Live Document</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">From Strategy to Execution</div>
+  <h1 class="hero-title">Your step-by-step<br>plan to <span>launch &amp; grow</span><br>the community.</h1>
+  <p class="hero-desc">Every task, post, and milestone from the Community Strategy document translated into a clear, prioritized action plan for Karine, Marina, and the team.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Sections</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Guides</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Growth Phases</div></div>
+    <div class="stat"><div class="stat-num">2,000+</div><div class="stat-label">Target Members</div></div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('setup', this)">① Setup Checklist</button>
+  <button class="tab-btn" onclick="showTab('content', this)">② Content Launch Plan</button>
+  <button class="tab-btn" onclick="showTab('ops', this)">③ Ongoing Operations</button>
+  <button class="tab-btn" onclick="showTab('growth', this)">④ Growth Roadmap</button>
+</div>
+
+<!-- SECTION 1: SETUP -->
+<div id="setup" class="section active">
+  <h2 class="section-title">Setup Checklist</h2>
+  <p class="section-desc">Complete these tasks before inviting members. Work through Phase A → B → C in order. Owner: Karine (Admin), Marina (Executor).</p>
+
+  <div class="info-box">
+    <div class="info-label">Priority</div>
+    <div class="info-text">Complete Phase A first — nothing else works without the group foundation in place. Phase B and C can run in parallel once A is done.</div>
+  </div>
+
+  <div class="phase-header">
+    <span class="phase-label">Phase A</span>
+    <span class="phase-title">Group Foundation — Do First</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <table class="task-table">
+    <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="status-badge status-done">✓ Done</span></td><td>Create Facebook Group — StealthEnomics Founders Hub</td><td><span class="owner-tag">Karine</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Private group</td></tr>
+      <tr><td><span class="status-badge status-done">✓ Done</span></td><td>Upload cover image (Concept 2 — 3280×1712px)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Add logo in Canva first</td></tr>
+      <tr><td><span class="status-badge status-done">✓ Done</span></td><td>Set web address: facebook.com/groups/stealthenomicsfoundershub</td><td><span class="owner-tag">Karine</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text"></td></tr>
+      <tr><td><span class="status-badge status-progress">↻ In Progress</span></td><td>Add full group description referencing Launch / Scale / Optimize</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Copy from strategy doc</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Set up welcome screen pop-up for new members</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Copy written — paste in</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Add 3 new member questions (Stage, Challenge, How they found us)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Questions ready to add</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Add community rules (6 rules)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text"></td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Enable features: Guides, Topics, Resources, Events, Q&amp;A (via 'Add Features')</td><td><span class="owner-tag">Karine</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Via 'Add Features' menu</td></tr>
+    </tbody>
+  </table>
+
+  <div class="phase-header">
+    <span class="phase-label">Phase B</span>
+    <span class="phase-title">Content Structure</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <table class="task-table">
+    <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 11 Topics/Tags (Business Launch Tips, Funding &amp; Finance, Founder Stories, Operations &amp; Systems, Tech Tools, Ask the Community, Affiliate &amp; Partner Resources, Weekly Wins, Product &amp; Market Strategy, Webinar Discussions, Member Spotlight)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Add via post composer</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 6 Guides with titles and descriptions</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Descriptions ready to paste</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 1 content + tag: Business Launch Tips</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Post ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 2 content + tag: Product &amp; Market Strategy</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Post ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 3 content + tag: Funding &amp; Finance</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Post ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 4 content + tag: Operations &amp; Systems</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Post ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 5 content + tag: Tech Tools for Startups</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Post ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 6 (2 posts) + tag: Affiliate &amp; Partner Resources</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">2 posts ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Add all posts to their respective Guides after publishing</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">After publishing</td></tr>
+    </tbody>
+  </table>
+
+  <div class="phase-header">
+    <span class="phase-label">Phase C</span>
+    <span class="phase-title">Resources &amp; Welcome Posts</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <table class="task-table">
+    <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Add 11 resources to Resources tab (product pages, tools, affiliate links)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Full list in strategy doc</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Publish Welcome Post + add 1200×1200 image</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Image + copy ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Pin Welcome Post + Feature in Featured section</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">3 dots → Pin / Feature</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Publish Introduction Thread post + add image</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Image + copy ready</td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Feature Introduction Thread in Featured section</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text"></td></tr>
+      <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Invite first 50 members from email list + network</td><td><span class="owner-tag">Karine</span></td><td><span class="deadline-tag">Week 1–2</span></td><td class="note-text">Personal invites first</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 2: CONTENT -->
+<div id="content" class="section">
+  <h2 class="section-title">Content Launch Plan</h2>
+  <p class="section-desc">First 4 weeks of posts mapped to the content calendar. Post 5x/week. Apply the correct Topic tag to every post. All times EST.</p>
+
+  <div class="info-box">
+    <div class="info-label">Formula</div>
+    <div class="info-text"><strong>HOOK → VALUE → QUESTION</strong> on every post. Always end with a question that invites a comment. More comments = more reach = more members.</div>
+  </div>
+
+  <div class="week-label"><span class="week-num">WEEK 1</span> Foundation Week</div>
+  <div class="week-grid">
+    <div class="day-card"><div class="day-name">Monday</div><div class="day-time">8:00 AM</div><div class="day-post">Welcome Post (pinned)</div><div class="day-tag">—</div><div class="day-action">Pin + Feature</div></div>
+    <div class="day-card"><div class="day-name">Tuesday</div><div class="day-time">12:00 PM</div><div class="day-post">Introduction Thread "Who's in the room?"</div><div class="day-tag">Founder Stories</div><div class="day-action">★ Feature</div></div>
+    <div class="day-card"><div class="day-name">Wednesday</div><div class="day-time">9:00 AM</div><div class="day-post">Share: "Change Nothing" — Paul Hickey reel</div><div class="day-tag">Founder Stories</div><div class="day-action">Share from Page</div></div>
+    <div class="day-card"><div class="day-name">Thursday</div><div class="day-time">1:00 PM</div><div class="day-post">Webinar announcement — March 24th Christopher Bell III</div><div class="day-tag">Webinar Discussions</div><div class="day-action">★ Feature + Event</div></div>
+    <div class="day-card"><div class="day-name">Friday</div><div class="day-time">10:00 AM</div><div class="day-post">Share: "50% of Businesses Fail Within 5 Years" reel</div><div class="day-tag">Business Launch Tips</div><div class="day-action">Share from Page</div></div>
+  </div>
+
+  <div class="week-label"><span class="week-num">WEEK 2</span> Value Week</div>
+  <div class="week-grid">
+    <div class="day-card"><div class="day-name">Monday</div><div class="day-time">8:00 AM</div><div class="day-post">"Do You Have One More Mountain Left?" motivational reel</div><div class="day-tag">Founder Stories</div><div class="day-action">Share from Page</div></div>
+    <div class="day-card"><div class="day-name">Tuesday</div><div class="day-time">12:00 PM</div><div class="day-post">Guide 1: The 5 Things Founders Skip at Launch</div><div class="day-tag">Business Launch Tips</div><div class="day-action">Add to Guide 1</div></div>
+    <div class="day-card"><div class="day-name">Wednesday</div><div class="day-time">9:00 AM</div><div class="day-post">Discussion: "What stage are you at — Launch, Scale or Optimize?"</div><div class="day-tag">Ask the Community</div><div class="day-action">Pin temporarily</div></div>
+    <div class="day-card"><div class="day-name">Thursday</div><div class="day-time">1:00 PM</div><div class="day-post">Share: "Complexity is the Enemy of Scale" graphic</div><div class="day-tag">Operations &amp; Systems</div><div class="day-action">Share from Page</div></div>
+    <div class="day-card"><div class="day-name">Friday</div><div class="day-time">10:00 AM</div><div class="day-post">Share: "58% Higher Revenue Growth" infographic</div><div class="day-tag">Operations &amp; Systems</div><div class="day-action">Share from Page</div></div>
+  </div>
+
+  <div class="week-label"><span class="week-num">WEEK 3</span> Webinar Week — March 24th</div>
+  <div class="week-grid">
+    <div class="day-card"><div class="day-name">Monday</div><div class="day-time">8:00 AM</div><div class="day-post">"Most People Don't Know Which One They Are" — 5 business stages (IG Reel)</div><div class="day-tag">Founder Stories</div><div class="day-action">Share from IG</div></div>
+    <div class="day-card"><div class="day-name">Tuesday</div><div class="day-time">12:00 PM</div><div class="day-post">Guide 2: Market Validation 3-Step Framework</div><div class="day-tag">Product &amp; Market Strategy</div><div class="day-action">Add to Guide 2</div></div>
+    <div class="day-card"><div class="day-name">Wednesday</div><div class="day-time">9:00 AM</div><div class="day-post">Webinar reminder: "Happening this Thursday at 12 PM EST!"</div><div class="day-tag">Webinar Discussions</div><div class="day-action">Reminder post</div></div>
+    <div class="day-card" style="border-color: var(--lime); border-width: 2px;"><div class="day-name">Thursday Mar 24</div><div class="day-time">9:00 AM</div><div class="day-post">⚡ Final webinar reminder — 3 hours before. Registration link in comments.</div><div class="day-tag">Webinar Discussions</div><div class="day-action">★ Feature temporarily</div></div>
+    <div class="day-card"><div class="day-name">Friday</div><div class="day-time">10:00 AM</div><div class="day-post">Webinar recap + replay link (comment "REPLAY" to receive)</div><div class="day-tag">Webinar Discussions</div><div class="day-action">Update Featured</div></div>
+  </div>
+
+  <div class="week-label"><span class="week-num">WEEK 4</span> Community Building Week</div>
+  <div class="week-grid">
+    <div class="day-card"><div class="day-name">Monday</div><div class="day-time">8:00 AM</div><div class="day-post">Mindset: Open-ended founder challenge post (Hook → Value → Question)</div><div class="day-tag">Founder Stories</div><div class="day-action">Engagement post</div></div>
+    <div class="day-card"><div class="day-name">Tuesday</div><div class="day-time">12:00 PM</div><div class="day-post">Guide 3: Funding Options for SMB Founders</div><div class="day-tag">Funding &amp; Finance</div><div class="day-action">Add to Guide 3</div></div>
+    <div class="day-card"><div class="day-name">Wednesday</div><div class="day-time">9:00 AM</div><div class="day-post">Discussion: "What's the #1 tool that changed your business?"</div><div class="day-tag">Tech Tools for Startups</div><div class="day-action">Discussion post</div></div>
+    <div class="day-card"><div class="day-name">Thursday</div><div class="day-time">1:00 PM</div><div class="day-post">Guide 6: Refer. Earn. Scale — Affiliate Program Post 1</div><div class="day-tag">Affiliate &amp; Partner Resources</div><div class="day-action">Add to Guide 6</div></div>
+    <div class="day-card"><div class="day-name">Friday</div><div class="day-time">10:00 AM</div><div class="day-post">First Weekly Wins post: "Drop your win this week — big or small"</div><div class="day-tag">Weekly Wins</div><div class="day-action">★ Feature</div></div>
+  </div>
+</div>
+
+<!-- SECTION 3: OPS -->
+<div id="ops" class="section">
+  <h2 class="section-title">Ongoing Operations</h2>
+  <p class="section-desc">Recurring responsibilities by role. These begin from Week 1 and continue indefinitely.</p>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <div class="role-header" style="border-left: 3px solid var(--lime);">
+        <div class="role-name">Marina</div>
+        <div class="role-title">Primary Moderator</div>
+        <div class="role-time">10–15 hrs / week</div>
+      </div>
+      <ul class="role-tasks">
+        <li><span class="task-freq">Daily 8AM</span>Approve new member requests + send welcome message</li>
+        <li><span class="task-freq">Daily 12PM</span>Engage with posts — respond to comments, ask follow-up questions</li>
+        <li><span class="task-freq">Daily 6PM</span>Final moderation check — remove spam, flag for Karine's review</li>
+        <li><span class="task-freq">Daily</span>Post or share a Story (quick tip, poll, behind-the-scenes)</li>
+        <li><span class="task-freq">Monday</span>Publish Monday Mindset post at 8 AM</li>
+        <li><span class="task-freq">Tuesday</span>Publish Tips &amp; Tactics post at 12 PM + Paul's video if available</li>
+        <li><span class="task-freq">Wednesday</span>Publish Discussion Day post at 9 AM</li>
+        <li><span class="task-freq">Thursday</span>Publish Startup Strategy post at 1 PM</li>
+        <li><span class="task-freq">Friday</span>Publish Weekly Wins post at 10 AM</li>
+        <li><span class="task-freq">Weekly Fri</span>Compile weekly metrics report (members, top posts, engagement, webinar registrations)</li>
+        <li><span class="task-freq">Weekly Mon</span>Review content calendar with Karine</li>
+        <li><span class="task-freq">Monthly</span>Update Featured section with most engaged posts</li>
+        <li><span class="task-freq">Monthly</span>Identify top contributor for Member Spotlight post</li>
+      </ul>
+    </div>
+
+    <div class="role-card">
+      <div class="role-header" style="border-left: 3px solid var(--blue);">
+        <div class="role-name">Karine</div>
+        <div class="role-title">Group Admin &amp; Content Approver</div>
+        <div class="role-time">7–10 hrs / week</div>
+      </div>
+      <ul class="role-tasks">
+        <li><span class="task-freq">Weekly Mon</span>Review and approve all posts for the coming week</li>
+        <li><span class="task-freq">Weekly</span>Content planning session with Marina — review performance, plan next week</li>
+        <li><span class="task-freq">Weekly</span>Coordinate webinar promotions with community calendar</li>
+        <li><span class="task-freq">Monthly</span>Community health review — member growth, engagement trends</li>
+        <li><span class="task-freq">Monthly</span>Review metrics report from Marina — adjust strategy</li>
+        <li><span class="task-freq">Monthly</span>Strategic direction check — align content with business priorities</li>
+        <li><span class="task-freq">Monthly</span>Approve Member Spotlight post before Marina publishes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-label">Key Rule</div>
+    <div class="info-text">Respond to every comment within 2 hours during business hours. Ask a follow-up question. Never let a comment go unanswered in the first 48 hours — this is the single biggest driver of Facebook Group reach.</div>
+  </div>
+  <div class="info-box">
+    <div class="info-label">Future Hire</div>
+    <div class="info-text">Dedicated Community Manager recommended when community exceeds 500–750 members. Full-time moderation, advanced analytics, member retention &amp; onboarding optimization.</div>
+  </div>
+</div>
+
+<!-- SECTION 4: GROWTH -->
+<div id="growth" class="section">
+  <h2 class="section-title">Growth Roadmap</h2>
+  <p class="section-desc">Four phases from launch to 2,000+ members. Each phase has a clear focus, key actions, and a milestone that signals readiness to move forward.</p>
+
+  <div class="roadmap">
+    <div class="phase-card">
+      <div class="phase-card-header" style="border-top: 3px solid var(--blue);">
+        <div class="phase-num">Phase 1 · Month 1–2</div>
+        <div class="phase-focus">Foundation</div>
+        <div class="phase-time">Budget: $300 test</div>
+      </div>
+      <div class="phase-card-body">
+        <ul class="phase-actions">
+          <li>Seed with 50–100 quality members via personal invites</li>
+          <li>Post 5x/week — 80% discussion posts</li>
+          <li>Respond to every comment within 2 hours</li>
+          <li>Launch Facebook Engagement Ads ($300 test budget)</li>
+          <li>Complete all setup checklist items</li>
+        </ul>
+        <div class="phase-milestone">
+          <div class="phase-milestone-label">Milestone</div>
+          <div class="phase-milestone-text">100 members with 20%+ weekly engagement rate</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-card-header" style="border-top: 3px solid var(--lime);">
+        <div class="phase-num">Phase 2 · Month 2–3</div>
+        <div class="phase-focus">Engagement</div>
+        <div class="phase-time">Budget: $400–500</div>
+      </div>
+      <div class="phase-card-body">
+        <ul class="phase-actions">
+          <li>Optimize Facebook Ads on winning ad</li>
+          <li>Member invitation campaign: "Invite one founder friend"</li>
+          <li>Feature first founder success story</li>
+          <li>First soft CTA: webinar invite or free resource</li>
+        </ul>
+        <div class="phase-milestone">
+          <div class="phase-milestone-label">Milestone</div>
+          <div class="phase-milestone-text">250 members + proven ad formula + first webinar conversions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-card-header" style="border-top: 3px solid var(--blue2);">
+        <div class="phase-num">Phase 3 · Month 4–6</div>
+        <div class="phase-focus">Scale</div>
+        <div class="phase-time">Budget: $700–800/mo</div>
+      </div>
+      <div class="phase-card-body">
+        <ul class="phase-actions">
+          <li>Scale Facebook Ads to $700–800/month</li>
+          <li>Member referral incentive program</li>
+          <li>Cross-platform promotion (LinkedIn, Instagram, Email)</li>
+          <li>Guest expert sessions 1x/month</li>
+          <li>Webinar-to-community funnel</li>
+          <li>Launch community challenges</li>
+        </ul>
+        <div class="phase-milestone">
+          <div class="phase-milestone-label">Milestone</div>
+          <div class="phase-milestone-text">750 members + self-sustaining growth + measurable revenue impact</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-card-header" style="border-top: 3px solid var(--lime2);">
+        <div class="phase-num">Phase 4 · Month 7–12</div>
+        <div class="phase-focus">Maturity</div>
+        <div class="phase-time">Budget: $500–600/mo</div>
+      </div>
+      <div class="phase-card-body">
+        <ul class="phase-actions">
+          <li>Reduce ads — focus on retargeting</li>
+          <li>Monthly Talks: Chris / Demond / Paul + guests</li>
+          <li>Video testimonials + founder case studies</li>
+          <li>Community-exclusive offers</li>
+          <li>Community-driven content topics</li>
+          <li>Consider hiring Community Manager</li>
+        </ul>
+        <div class="phase-milestone">
+          <div class="phase-milestone-label">Milestone</div>
+          <div class="phase-milestone-text">2,000 members + community is #1 lead source + positive ROI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 20px;">Success Metrics by Phase</h3>
+  <div class="metrics-grid">
+    <div class="metric-cell header">Metric</div>
+    <div class="metric-cell header">Month 1–3</div>
+    <div class="metric-cell header">Month 4–6</div>
+    <div class="metric-cell header">Month 7–12</div>
+    <div class="metric-cell header">Long-Term</div>
+
+    <div class="metric-name">Members</div>
+    <div class="metric-cell"><div class="metric-val">100–300</div></div>
+    <div class="metric-cell"><div class="metric-val">500–1K</div></div>
+    <div class="metric-cell"><div class="metric-val">1,500+</div></div>
+    <div class="metric-cell"><div class="metric-val">2,000+</div></div>
+
+    <div class="metric-name">Weekly Comments</div>
+    <div class="metric-cell"><div class="metric-val">50+</div></div>
+    <div class="metric-cell"><div class="metric-val">100+</div></div>
+    <div class="metric-cell"><div class="metric-val">200+</div></div>
+    <div class="metric-cell"><div class="metric-val">Community-driven</div></div>
+
+    <div class="metric-name">Response Rate</div>
+    <div class="metric-cell"><div class="metric-val">80%</div></div>
+    <div class="metric-cell"><div class="metric-val">90%+</div></div>
+    <div class="metric-cell"><div class="metric-val">95%+</div></div>
+    <div class="metric-cell"><div class="metric-val">Near-instant</div></div>
+
+    <div class="metric-name">Webinar Conversions</div>
+    <div class="metric-cell"><div class="metric-val">5–10</div></div>
+    <div class="metric-cell"><div class="metric-val">10–25</div></div>
+    <div class="metric-cell"><div class="metric-val">25–50</div></div>
+    <div class="metric-cell"><div class="metric-val">#1 lead source</div></div>
+  </div>
+
+  <h3 style="font-family: Montserrat, sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin: 32px 0 16px;">Budget Allocation</h3>
+  <div class="budget-grid">
+    <div class="budget-card">
+      <div class="budget-amount">$600–700</div>
+      <div class="budget-item">Facebook Engagement Ads</div>
+      <div class="budget-desc">SMB founder-focused group growth campaigns. Start with $300 test budget in Phase 1, scale based on results.</div>
+    </div>
+    <div class="budget-card">
+      <div class="budget-amount">$300–400</div>
+      <div class="budget-item">Content Boosting &amp; Awareness</div>
+      <div class="budget-desc">Boost top-performing posts for broader SMB founder reach. Focus on posts with highest organic engagement.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>StealthEnomics Founders Hub — Community Action Plan</strong><br>
+  This is a living document — review and update it monthly.<br>
+  Every decision should come back to one question: <em>does this give value to a founder?</em>
+</div>
+
+<script>
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
