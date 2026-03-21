@@ -794,7 +794,7 @@
     <div class="phase-line"></div>
   </div>
 
-  <table class="task-table">
+  <table id="tbl-a" class="task-table">
     <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td><span class="status-badge status-done">✓ Done</span></td><td>Create Facebook Group — StealthEnomics Founders Hub</td><td><span class="owner-tag">Karine</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Private group</td></tr>
@@ -814,7 +814,7 @@
     <div class="phase-line"></div>
   </div>
 
-  <table class="task-table">
+  <table id="tbl-b" class="task-table">
     <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 11 Topics/Tags (Business Launch Tips, Funding &amp; Finance, Founder Stories, Operations &amp; Systems, Tech Tools, Ask the Community, Affiliate &amp; Partner Resources, Weekly Wins, Product &amp; Market Strategy, Webinar Discussions, Member Spotlight)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Add via post composer</td></tr>
@@ -835,7 +835,7 @@
     <div class="phase-line"></div>
   </div>
 
-  <table class="task-table">
+  <table id="tbl-c" class="task-table">
     <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td><span class="status-badge status-todo">○ To Do</span></td><td>Add 11 resources to Resources tab (product pages, tools, affiliate links)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Full list in strategy doc</td></tr>
@@ -1142,6 +1142,32 @@
     box-shadow: 0 0 0 1.5px #1975BB;
   }
   td .editable-cell { cursor: text; }
+
+  /* Delete column */
+  .del-col { width: 36px; text-align: center; padding: 0 4px !important; }
+  .del-btn {
+    background: transparent; border: none;
+    color: rgba(255,255,255,0.15); font-size: 15px;
+    cursor: pointer; padding: 4px 6px; border-radius: 4px;
+    transition: color 0.15s, background 0.15s; line-height: 1;
+  }
+  tr:hover .del-btn { color: #f87171; }
+  .del-btn:hover { background: rgba(239,68,68,0.1); color: #f87171; }
+
+  /* Add row button */
+  .add-row-wrap { margin: 6px 0 24px; }
+  .add-row-btn {
+    width: 100%; background: transparent;
+    border: 1px dashed rgba(255,255,255,0.13);
+    color: var(--mid-blue); font-family: 'Roboto', sans-serif;
+    font-size: 12px; font-weight: 500; padding: 8px 20px;
+    border-radius: 8px; cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+  .add-row-btn:hover {
+    border-color: var(--lime); color: var(--lime);
+    background: rgba(179,194,52,0.05);
+  }
 </style>
 
 <script>
@@ -1267,30 +1293,86 @@
       .catch(() => setFbStatus('Não foi possível conectar. Verifique o token.', '#f87171'));
   }
 
-  // ── INIT ────────────────────────────────────────────────────
-  document.addEventListener('DOMContentLoaded', () => {
-    // Status dropdowns
-    document.querySelectorAll('.status-badge').forEach((span, i) => {
-      const savedClass = localStorage.getItem('status_' + i);
-      const currentClass = savedClass || getStatusClass(span);
-      const sel = buildSelect(currentClass, i);
-      // Update counts whenever a status changes
+  // ── TABLE INIT ───────────────────────────────────────────────
+  const TABLE_IDS = ['tbl-a', 'tbl-b', 'tbl-c'];
+
+  function initRow(row, rid) {
+    row.dataset.rid = rid;
+    // Skip if deleted
+    if (localStorage.getItem('del_' + rid) === '1') { row.remove(); return; }
+    // Add delete button cell
+    const delTd = document.createElement('td');
+    delTd.className = 'del-col';
+    delTd.innerHTML = '<button class="del-btn" title="Delete row" onclick="delRow(this)">✕</button>';
+    row.appendChild(delTd);
+    // Status dropdown
+    const span = row.cells[0].querySelector('.status-badge');
+    if (span) {
+      const savedClass = localStorage.getItem('status_' + rid) || getStatusClass(span);
+      const sel = buildSelect(savedClass, rid);
       sel.addEventListener('change', () => setTimeout(updateCounts, 0));
       span.replaceWith(sel);
-    });
-
+    }
     // Editable cells
-    document.querySelectorAll('.task-table tbody tr').forEach((row, rowIdx) => {
-      const cells = row.querySelectorAll('td');
-      if (cells[1]) makeEditable(cells[1], `cell_${rowIdx}_task`);
-      if (cells[2]) makeEditable(cells[2].querySelector('.owner-tag') || cells[2], `cell_${rowIdx}_owner`);
-      if (cells[3]) makeEditable(cells[3].querySelector('.deadline-tag') || cells[3], `cell_${rowIdx}_deadline`);
-      if (cells[4]) makeEditable(cells[4], `cell_${rowIdx}_notes`);
+    const c = row.cells;
+    if (c[1]) makeEditable(c[1], `cell_${rid}_task`);
+    if (c[2]) makeEditable(c[2].querySelector('.owner-tag') || c[2], `cell_${rid}_owner`);
+    if (c[3]) makeEditable(c[3].querySelector('.deadline-tag') || c[3], `cell_${rid}_deadline`);
+    if (c[4]) makeEditable(c[4], `cell_${rid}_notes`);
+  }
+
+  function initTable(tableId) {
+    const tbl = document.getElementById(tableId);
+    if (!tbl) return;
+    // Add delete column header
+    tbl.querySelector('thead tr').insertAdjacentHTML('beforeend', '<th class="del-col"></th>');
+    // Init existing rows
+    tbl.querySelectorAll('tbody tr').forEach((row, i) => initRow(row, `${tableId}_${i}`));
+    // Restore custom rows
+    JSON.parse(localStorage.getItem('custom_' + tableId) || '[]').forEach(rid => {
+      if (localStorage.getItem('del_' + rid) !== '1') appendCustomRow(tbl, rid);
     });
+    // Add "+ Add Action" button
+    tbl.insertAdjacentHTML('afterend', `<div class="add-row-wrap"><button class="add-row-btn" onclick="addRow('${tableId}')">＋ Add Action</button></div>`);
+  }
 
-    // Initial count
+  function appendCustomRow(tbl, rid) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="status-badge status-todo">○ To Do</span></td>
+      <td></td>
+      <td><span class="owner-tag"></span></td>
+      <td><span class="deadline-tag"></span></td>
+      <td class="note-text"></td>`;
+    tbl.querySelector('tbody').appendChild(tr);
+    initRow(tr, rid);
+  }
+
+  function addRow(tableId) {
+    const rid = `${tableId}_new_${Date.now()}`;
+    const saved = JSON.parse(localStorage.getItem('custom_' + tableId) || '[]');
+    saved.push(rid);
+    localStorage.setItem('custom_' + tableId, JSON.stringify(saved));
+    const tbl = document.getElementById(tableId);
+    appendCustomRow(tbl, rid);
     updateCounts();
+    // Focus the task cell of the new row
+    const last = tbl.querySelector('tbody tr:last-child');
+    if (last && last.cells[1]) last.cells[1].focus();
+  }
 
+  function delRow(btn) {
+    const row = btn.closest('tr');
+    const rid = row.dataset.rid;
+    localStorage.setItem('del_' + rid, '1');
+    row.remove();
+    updateCounts();
+  }
+
+  // ── INIT ────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    TABLE_IDS.forEach(initTable);
+    updateCounts();
     // Facebook members (if configured)
     const groupId = localStorage.getItem('fb_group_id');
     const token   = localStorage.getItem('fb_token');
