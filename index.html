@@ -743,11 +743,31 @@
   <h1 class="hero-title">Your step-by-step<br>plan to <span>launch &amp; grow</span><br>the community.</h1>
   <p class="hero-desc">Every task, post, and milestone from the Community Strategy document translated into a clear, prioritized action plan for Karine, Marina, and the team.</p>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Sections</div></div>
-    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Guides</div></div>
-    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Growth Phases</div></div>
-    <div class="stat"><div class="stat-num">2,000+</div><div class="stat-label">Target Members</div></div>
+    <div class="stat"><div class="stat-num" id="count-done">—</div><div class="stat-label">✓ Concluídas</div></div>
+    <div class="stat"><div class="stat-num" id="count-progress">—</div><div class="stat-label">↻ Em andamento</div></div>
+    <div class="stat"><div class="stat-num" id="count-todo">—</div><div class="stat-label">○ Pendentes</div></div>
+    <div class="stat" id="stat-members" title="Clique para configurar a API do Facebook" style="cursor:pointer" onclick="toggleFbPanel()">
+      <div class="stat-num" id="count-members">—</div>
+      <div class="stat-label">👥 Membros no grupo</div>
+    </div>
   </div>
+</div>
+
+<!-- FACEBOOK CONFIG PANEL -->
+<div id="fb-panel" style="display:none; background:var(--navy2); border-bottom:1px solid rgba(255,255,255,0.08); padding:16px 48px; display:none;">
+  <div style="max-width:600px; display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+    <div style="flex:1; min-width:160px;">
+      <div style="font-size:11px; color:var(--mid-blue); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Group ID</div>
+      <input id="fb-group-id" type="text" placeholder="ex: 1234567890" style="width:100%; background:var(--navy); border:1px solid rgba(255,255,255,0.12); border-radius:6px; color:#fff; font-family:Roboto,sans-serif; font-size:13px; padding:8px 10px; outline:none;">
+    </div>
+    <div style="flex:2; min-width:200px;">
+      <div style="font-size:11px; color:var(--mid-blue); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Access Token</div>
+      <input id="fb-token" type="password" placeholder="EAAxxxxxxxx..." style="width:100%; background:var(--navy); border:1px solid rgba(255,255,255,0.12); border-radius:6px; color:#fff; font-family:Roboto,sans-serif; font-size:13px; padding:8px 10px; outline:none;">
+    </div>
+    <button onclick="saveFbConfig()" style="background:var(--lime); color:var(--navy); font-family:Montserrat,sans-serif; font-weight:700; font-size:12px; padding:8px 18px; border:none; border-radius:6px; cursor:pointer; white-space:nowrap;">Salvar e Conectar</button>
+    <button onclick="clearFbConfig()" style="background:transparent; color:var(--mid-blue); font-family:Roboto,sans-serif; font-size:12px; padding:8px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:6px; cursor:pointer;">Remover</button>
+  </div>
+  <div id="fb-status" style="font-size:12px; color:var(--mid-blue); margin-top:10px;"></div>
 </div>
 
 <!-- NAV TABS -->
@@ -1179,33 +1199,102 @@
     });
   }
 
+  // ── TASK COUNTERS ──────────────────────────────────────────
+  function updateCounts() {
+    const selects = document.querySelectorAll('.status-select');
+    let done = 0, progress = 0, todo = 0, blocked = 0;
+    selects.forEach(s => {
+      if (s.value === 'status-done')     done++;
+      else if (s.value === 'status-progress') progress++;
+      else if (s.value === 'status-blocked')  blocked++;
+      else todo++;
+    });
+    document.getElementById('count-done').textContent     = done;
+    document.getElementById('count-progress').textContent = progress;
+    // pending = to-do + blocked
+    document.getElementById('count-todo').textContent     = todo + blocked;
+  }
+
+  // ── FACEBOOK GROUP MEMBERS ──────────────────────────────────
+  function toggleFbPanel() {
+    const p = document.getElementById('fb-panel');
+    p.style.display = p.style.display === 'none' ? 'block' : 'none';
+    if (p.style.display === 'block') {
+      document.getElementById('fb-group-id').value = localStorage.getItem('fb_group_id') || '';
+      document.getElementById('fb-token').value    = localStorage.getItem('fb_token')    || '';
+    }
+  }
+
+  function saveFbConfig() {
+    const groupId = document.getElementById('fb-group-id').value.trim();
+    const token   = document.getElementById('fb-token').value.trim();
+    if (!groupId || !token) { setFbStatus('Preencha os dois campos.', '#f87171'); return; }
+    localStorage.setItem('fb_group_id', groupId);
+    localStorage.setItem('fb_token', token);
+    setFbStatus('Salvando...', '#fbbf24');
+    fetchGroupMembers(groupId, token);
+  }
+
+  function clearFbConfig() {
+    localStorage.removeItem('fb_group_id');
+    localStorage.removeItem('fb_token');
+    document.getElementById('count-members').textContent = '—';
+    document.getElementById('fb-group-id').value = '';
+    document.getElementById('fb-token').value = '';
+    setFbStatus('Configuração removida.', '#94a3b8');
+  }
+
+  function setFbStatus(msg, color) {
+    const el = document.getElementById('fb-status');
+    el.textContent = msg;
+    el.style.color = color || '#90BFED';
+  }
+
+  function fetchGroupMembers(groupId, token) {
+    const url = `https://graph.facebook.com/${groupId}?fields=member_count&access_token=${token}`;
+    fetch(url)
+      .then(r => r.json())
+      .then(data => {
+        if (data.member_count !== undefined) {
+          document.getElementById('count-members').textContent = data.member_count.toLocaleString();
+          setFbStatus(`Atualizado agora mesmo · meta: 250 membros`, '#4ade80');
+          document.getElementById('fb-panel').style.display = 'none';
+        } else {
+          const msg = data.error ? data.error.message : 'Erro desconhecido.';
+          setFbStatus('Erro: ' + msg, '#f87171');
+        }
+      })
+      .catch(() => setFbStatus('Não foi possível conectar. Verifique o token.', '#f87171'));
+  }
+
+  // ── INIT ────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     // Status dropdowns
     document.querySelectorAll('.status-badge').forEach((span, i) => {
       const savedClass = localStorage.getItem('status_' + i);
       const currentClass = savedClass || getStatusClass(span);
       const sel = buildSelect(currentClass, i);
+      // Update counts whenever a status changes
+      sel.addEventListener('change', () => setTimeout(updateCounts, 0));
       span.replaceWith(sel);
     });
 
-    // Editable task cells: task text (col 1), owner (col 2), deadline (col 3), notes (col 4)
+    // Editable cells
     document.querySelectorAll('.task-table tbody tr').forEach((row, rowIdx) => {
       const cells = row.querySelectorAll('td');
-      // col 1 — task description (full td content)
       if (cells[1]) makeEditable(cells[1], `cell_${rowIdx}_task`);
-      // col 2 — owner tag (the span inside)
-      if (cells[2]) {
-        const tag = cells[2].querySelector('.owner-tag') || cells[2];
-        makeEditable(tag, `cell_${rowIdx}_owner`);
-      }
-      // col 3 — deadline
-      if (cells[3]) {
-        const tag = cells[3].querySelector('.deadline-tag') || cells[3];
-        makeEditable(tag, `cell_${rowIdx}_deadline`);
-      }
-      // col 4 — notes
+      if (cells[2]) makeEditable(cells[2].querySelector('.owner-tag') || cells[2], `cell_${rowIdx}_owner`);
+      if (cells[3]) makeEditable(cells[3].querySelector('.deadline-tag') || cells[3], `cell_${rowIdx}_deadline`);
       if (cells[4]) makeEditable(cells[4], `cell_${rowIdx}_notes`);
     });
+
+    // Initial count
+    updateCounts();
+
+    // Facebook members (if configured)
+    const groupId = localStorage.getItem('fb_group_id');
+    const token   = localStorage.getItem('fb_token');
+    if (groupId && token) fetchGroupMembers(groupId, token);
   });
 </script>
 </body>
