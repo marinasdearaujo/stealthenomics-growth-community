@@ -859,32 +859,7 @@
     <div class="info-text"><strong>HOOK → VALUE → QUESTION</strong> on every post. Example: "I almost gave up on my first business because I couldn't validate my market fast enough… Here's the one framework that changed everything for me… What's the biggest challenge holding you back from launching right now?" More comments = more reach = more members.</div>
   </div>
 
-  <div class="week-label"><span class="week-num">WEEK 1</span> Mar 16–20 · Launch Week <span style="font-size:11px;color:#4ade80;font-weight:600;margin-left:8px;">✓ Mon: Welcome Post · Tue: Intro Thread</span></div>
-  <div class="week-grid">
-    <div class="day-card">
-      <div class="day-name">Wednesday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 18</span></div>
-      <div class="day-time">9:00 AM</div>
-      <div class="day-post">Paul Hickey Reel — "If you change nothing, nothing changes." Hickeyism series opener.</div>
-      <div class="day-tag">Founder Stories</div>
-      <div class="day-action">Share from Page</div>
-    </div>
-    <div class="day-card">
-      <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 19</span></div>
-      <div class="day-time">1:00 PM</div>
-      <div class="day-post">Webinar Announcement — Christopher Bell III · Tue March 24 at 12 PM EST. "Launch Your Business in 45 Days." Registration link in comments.</div>
-      <div class="day-tag">Webinar Discussions</div>
-      <div class="day-action">★ Feature + Create Event</div>
-    </div>
-    <div class="day-card">
-      <div class="day-name">Friday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 20</span></div>
-      <div class="day-time">10:00 AM</div>
-      <div class="day-post">"50% of Businesses Fail Within 5 Years" Reel — Problem → Agitate → Solution. Webinar CTA in comments.</div>
-      <div class="day-tag">Business Launch Tips</div>
-      <div class="day-action">Share from Page</div>
-    </div>
-  </div>
-
-  <div class="week-label"><span class="week-num">WEEK 2</span> Mar 23–27 · Webinar Week</div>
+  <div class="week-label"><span class="week-num">WEEK 1</span> Mar 23–27 · Webinar Week</div>
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 23</span></div>
@@ -923,7 +898,7 @@
     </div>
   </div>
 
-  <div class="week-label"><span class="week-num">WEEK 3</span> Mar 30–Apr 3 · Post-Webinar Value</div>
+  <div class="week-label"><span class="week-num">WEEK 2</span> Mar 30–Apr 3 · Post-Webinar Value</div>
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 30</span></div>
@@ -962,7 +937,7 @@
     </div>
   </div>
 
-  <div class="week-label"><span class="week-num">WEEK 4</span> Apr 6–10 · Community Building</div>
+  <div class="week-label"><span class="week-num">WEEK 3</span> Apr 6–10 · Community Building</div>
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 6</span></div>
@@ -1275,6 +1250,21 @@
     border-color: var(--lime); color: var(--lime);
     background: rgba(179,194,52,0.05);
   }
+
+  /* Repost badge */
+  .repost-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    background: rgba(25,117,187,0.18);
+    color: var(--mid-blue);
+    border: 1px solid rgba(25,117,187,0.3);
+    padding: 2px 7px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+  }
 </style>
 
 <script>
@@ -1512,9 +1502,22 @@
     localStorage.setItem('se_migrated_v3', '1');
   }
 
+  // ── REPOST BADGES ────────────────────────────────────────────
+  function addRepostBadges() {
+    document.querySelectorAll('.day-action').forEach(el => {
+      const t = el.textContent;
+      let label = null;
+      if (t.includes('Share from IG'))   label = '↩ Repost from Instagram';
+      else if (t.includes('Share from')) label = '↩ Repost from Page';
+      if (label) el.closest('.day-card').insertAdjacentHTML('afterbegin',
+        `<div class="repost-badge">${label}</div>`);
+    });
+  }
+
   // ── INIT ────────────────────────────────────────────────────
   document.addEventListener('DOMContentLoaded', () => {
     migrateLocalStorage();
+    addRepostBadges();
     TABLE_IDS.forEach(initTable);
     updateCounts();
     // Facebook members (if configured)
