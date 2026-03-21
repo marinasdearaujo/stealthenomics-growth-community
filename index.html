@@ -1103,6 +1103,25 @@
   .status-select.status-todo    { background-color: rgba(148,163,184,0.1);  color: #94a3b8; }
   .status-select.status-blocked { background-color: rgba(239,68,68,0.15);   color: #f87171; }
   .status-select option { background: #0F2952; color: #fff; font-weight: 500; }
+
+  /* Editable cells */
+  .editable-cell {
+    outline: none;
+    border-radius: 4px;
+    transition: background 0.15s, box-shadow 0.15s;
+    min-width: 20px;
+    display: inline-block;
+    width: 100%;
+  }
+  .editable-cell:hover {
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1);
+  }
+  .editable-cell:focus {
+    background: rgba(25,117,187,0.15);
+    box-shadow: 0 0 0 1.5px #1975BB;
+  }
+  td .editable-cell { cursor: text; }
 </style>
 
 <script>
@@ -1144,12 +1163,48 @@
     return sel;
   }
 
+  function makeEditable(el, storageKey) {
+    const saved = localStorage.getItem(storageKey);
+    if (saved !== null) el.textContent = saved;
+
+    el.classList.add('editable-cell');
+    el.contentEditable = 'true';
+    el.spellcheck = false;
+
+    el.addEventListener('blur', function() {
+      localStorage.setItem(storageKey, this.textContent);
+    });
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); this.blur(); }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
+    // Status dropdowns
     document.querySelectorAll('.status-badge').forEach((span, i) => {
       const savedClass = localStorage.getItem('status_' + i);
       const currentClass = savedClass || getStatusClass(span);
       const sel = buildSelect(currentClass, i);
       span.replaceWith(sel);
+    });
+
+    // Editable task cells: task text (col 1), owner (col 2), deadline (col 3), notes (col 4)
+    document.querySelectorAll('.task-table tbody tr').forEach((row, rowIdx) => {
+      const cells = row.querySelectorAll('td');
+      // col 1 — task description (full td content)
+      if (cells[1]) makeEditable(cells[1], `cell_${rowIdx}_task`);
+      // col 2 — owner tag (the span inside)
+      if (cells[2]) {
+        const tag = cells[2].querySelector('.owner-tag') || cells[2];
+        makeEditable(tag, `cell_${rowIdx}_owner`);
+      }
+      // col 3 — deadline
+      if (cells[3]) {
+        const tag = cells[3].querySelector('.deadline-tag') || cells[3];
+        makeEditable(tag, `cell_${rowIdx}_deadline`);
+      }
+      // col 4 — notes
+      if (cells[4]) makeEditable(cells[4], `cell_${rowIdx}_notes`);
     });
   });
 </script>
