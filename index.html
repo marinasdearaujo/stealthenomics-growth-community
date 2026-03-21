@@ -146,6 +146,15 @@
     color: var(--lime);
   }
 
+  .stat-target {
+    font-size: 10px;
+    color: var(--lime);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+    opacity: 0.8;
+  }
+
   .stat-label {
     font-size: 12px;
     color: var(--mid-blue);
@@ -743,12 +752,13 @@
   <h1 class="hero-title">Your step-by-step<br>plan to <span>launch &amp; grow</span><br>the community.</h1>
   <p class="hero-desc">Every task, post, and milestone from the Community Strategy document translated into a clear, prioritized action plan for Karine, Marina, and the team.</p>
   <div class="hero-stats">
-    <div class="stat"><div class="stat-num" id="count-done">—</div><div class="stat-label">✓ Concluídas</div></div>
-    <div class="stat"><div class="stat-num" id="count-progress">—</div><div class="stat-label">↻ Em andamento</div></div>
-    <div class="stat"><div class="stat-num" id="count-todo">—</div><div class="stat-label">○ Pendentes</div></div>
-    <div class="stat" id="stat-members" title="Clique para configurar a API do Facebook" style="cursor:pointer" onclick="toggleFbPanel()">
+    <div class="stat"><div class="stat-num" id="count-done">—</div><div class="stat-label">✓ Completed</div></div>
+    <div class="stat"><div class="stat-num" id="count-progress">—</div><div class="stat-label">↻ In Progress</div></div>
+    <div class="stat"><div class="stat-num" id="count-todo">—</div><div class="stat-label">○ Pending</div></div>
+    <div class="stat" id="stat-members" title="Click to configure Facebook API" style="cursor:pointer" onclick="toggleFbPanel()">
       <div class="stat-num" id="count-members">—</div>
-      <div class="stat-label">👥 Membros no grupo</div>
+      <div class="stat-label">👥 Group Members</div>
+      <div class="stat-target">Target: 2,000</div>
     </div>
   </div>
 </div>
@@ -764,8 +774,8 @@
       <div style="font-size:11px; color:var(--mid-blue); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Access Token</div>
       <input id="fb-token" type="password" placeholder="EAAxxxxxxxx..." style="width:100%; background:var(--navy); border:1px solid rgba(255,255,255,0.12); border-radius:6px; color:#fff; font-family:Roboto,sans-serif; font-size:13px; padding:8px 10px; outline:none;">
     </div>
-    <button onclick="saveFbConfig()" style="background:var(--lime); color:var(--navy); font-family:Montserrat,sans-serif; font-weight:700; font-size:12px; padding:8px 18px; border:none; border-radius:6px; cursor:pointer; white-space:nowrap;">Salvar e Conectar</button>
-    <button onclick="clearFbConfig()" style="background:transparent; color:var(--mid-blue); font-family:Roboto,sans-serif; font-size:12px; padding:8px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:6px; cursor:pointer;">Remover</button>
+    <button onclick="saveFbConfig()" style="background:var(--lime); color:var(--navy); font-family:Montserrat,sans-serif; font-weight:700; font-size:12px; padding:8px 18px; border:none; border-radius:6px; cursor:pointer; white-space:nowrap;">Save &amp; Connect</button>
+    <button onclick="clearFbConfig()" style="background:transparent; color:var(--mid-blue); font-family:Roboto,sans-serif; font-size:12px; padding:8px 12px; border:1px solid rgba(255,255,255,0.1); border-radius:6px; cursor:pointer;">Remove</button>
   </div>
   <div id="fb-status" style="font-size:12px; color:var(--mid-blue); margin-top:10px;"></div>
 </div>
@@ -1254,10 +1264,10 @@
   function saveFbConfig() {
     const groupId = document.getElementById('fb-group-id').value.trim();
     const token   = document.getElementById('fb-token').value.trim();
-    if (!groupId || !token) { setFbStatus('Preencha os dois campos.', '#f87171'); return; }
+    if (!groupId || !token) { setFbStatus('Please fill in both fields.', '#f87171'); return; }
     localStorage.setItem('fb_group_id', groupId);
     localStorage.setItem('fb_token', token);
-    setFbStatus('Salvando...', '#fbbf24');
+    setFbStatus('Saving...', '#fbbf24');
     fetchGroupMembers(groupId, token);
   }
 
@@ -1267,7 +1277,7 @@
     document.getElementById('count-members').textContent = '—';
     document.getElementById('fb-group-id').value = '';
     document.getElementById('fb-token').value = '';
-    setFbStatus('Configuração removida.', '#94a3b8');
+    setFbStatus('Configuration removed.', '#94a3b8');
   }
 
   function setFbStatus(msg, color) {
@@ -1283,14 +1293,14 @@
       .then(data => {
         if (data.member_count !== undefined) {
           document.getElementById('count-members').textContent = data.member_count.toLocaleString();
-          setFbStatus(`Atualizado agora mesmo · meta: 250 membros`, '#4ade80');
+          setFbStatus(`Updated just now · target: 2,000 members`, '#4ade80');
           document.getElementById('fb-panel').style.display = 'none';
         } else {
-          const msg = data.error ? data.error.message : 'Erro desconhecido.';
+          const msg = data.error ? data.error.message : 'Unknown error.';
           setFbStatus('Erro: ' + msg, '#f87171');
         }
       })
-      .catch(() => setFbStatus('Não foi possível conectar. Verifique o token.', '#f87171'));
+      .catch(() => setFbStatus('Could not connect. Please check your token.', '#f87171'));
   }
 
   // ── TABLE INIT ───────────────────────────────────────────────
