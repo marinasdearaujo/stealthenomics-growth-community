@@ -730,6 +730,27 @@
     .metrics-grid { grid-template-columns: repeat(2, 1fr); }
     .budget-grid { grid-template-columns: 1fr; }
   }
+
+  /* STAGE + FUNNEL LABELS */
+  .day-stage {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+  }
+  .stage-sm {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .stage-sm.launch { background: rgba(179,194,52,0.15); color: #B3C234; border: 1px solid rgba(179,194,52,0.4); }
+  .stage-sm.scale { background: rgba(25,117,187,0.12); color: #90BFED; border: 1px solid rgba(25,117,187,0.35); }
+  .stage-sm.optimize { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.22); }
+  .stage-sm.funnel { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.38); border: 1px solid rgba(255,255,255,0.1); }
 </style>
 </head>
 <body>
@@ -820,13 +841,13 @@
   <table id="tbl-b" class="task-table">
     <thead><tr><th>Status</th><th>Task</th><th>Owner</th><th>Deadline</th><th>Notes</th></tr></thead>
     <tbody><tr data-rid="b0"><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 11 Topics/Tags (Business Launch Tips, Funding &amp; Finance, Founder Stories, Operations &amp; Systems, Tech Tools, Ask the Community, Affiliate &amp; Partner Resources, Weekly Wins, Product &amp; Market Strategy, Webinar Discussions, Member Spotlight)</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Add via post composer</td></tr>
-      <tr data-rid="b1"><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 6 Guides in the group — titles: (1) Start Here: The Business Growth System · (2) Stage 1 — LAUNCH · (3) Stage 2 — SCALE · (4) Stage 3 — OPTIMIZE · (5) 30-Second Business Diagnostic · (6) Founder Resource Hub</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">All guide content ready below</td></tr>
+      <tr data-rid="b1"><td><span class="status-badge status-todo">○ To Do</span></td><td>Create 6 Guides in the group — titles: (1) Start Here: The Business Growth System · (2) Stage 1 — LAUNCH · (3) Stage 2 — SCALE · (4) Stage 3 — OPTIMIZE · (5) 30-Second Business Diagnostic · (6) Founder Resources: Tools We Trust at Every Stage</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">All guide content ready below</td></tr>
       <tr data-rid="b2"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 1: "Start Here — The StealthEnomics Business Growth System" · tag: Business Launch Tips</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Overview of 3-stage system: Launch → Scale → Optimize. Intro to the ecosystem.</td></tr>
       <tr data-rid="b3"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 2: "Stage 1 — LAUNCH: Build Your Business on the Right Foundation" · tag: Business Launch Tips</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">4 packages: Jet Pack (entry, no ops cost) · Launch Box Lite (mid-tier, with ops support) · Launch Box (full program, max support) · Launch Box Starter (webinar exclusive). No pricing in post. All include same 14 features. CTAs: view packages / webinar</td></tr>
       <tr data-rid="b4"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 3: "Stage 2 — SCALE: Strategic Advisory for Founders Ready to Grow" · tag: Operations &amp; Systems</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 1</span></td><td class="note-text">Business Management Consulting — GTM, SWOT, sales process. CTA: Book Strategy Call</td></tr>
       <tr data-rid="b5"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 4: "Stage 3 — OPTIMIZE: Track the Metrics That Actually Drive Your Business" · tag: Operations &amp; Systems</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Business Performance Center — KPI dashboard. Note: BPC access included in Launch Box for 45 days. CTA: Access the Platform</td></tr>
       <tr data-rid="b6"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 5: "Not Sure Where to Start? Take the 30-Second Business Diagnostic" · tag: Ask the Community</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">3-question quiz → directs to correct stage/offer. Key community entry point.</td></tr>
-      <tr data-rid="b7"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 6: "Founder Resource Hub — Tools We Trust at Every Stage" · tag: Affiliate &amp; Partner Resources</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Affiliate tools by stage: Bizee, LegalShield, QuickBooks, Fund &amp; Grow, RingCentral</td></tr>
+      <tr data-rid="b7"><td><span class="status-badge status-todo">○ To Do</span></td><td>Post Guide 6: "Founder Resources: Tools We Trust at Every Stage" · tag: Affiliate &amp; Partner Resources</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">Affiliate tools by stage: Bizee, LegalShield, QuickBooks, Fund &amp; Grow, RingCentral</td></tr>
       <tr data-rid="b8"><td><span class="status-badge status-todo">○ To Do</span></td><td>Add all posts to their respective Guides after publishing</td><td><span class="owner-tag">Marina</span></td><td><span class="deadline-tag">Week 2</span></td><td class="note-text">After publishing</td></tr>
     </tbody>
   </table>
@@ -852,17 +873,18 @@
 <!-- SECTION 2: CONTENT -->
 <div id="content" class="section">
   <h2 class="section-title">Content Launch Plan</h2>
-  <p class="section-desc">Posting schedule for the first 4 weeks. 5x/week, Mon–Fri. Apply the correct Topic tag to every post. All times EST.</p>
+  <p class="section-desc">Posting schedule for the first 6 weeks. 5x/week, Mon–Fri. Every post is labeled with a Stage (🚀 Launch · 📈 Scale · ⚙️ Optimize) and Funnel stage (ToF · MoF · BoF). Mon = ToF awareness hook · Tue = MoF education · Wed = Hickeyism video · Thu = MoF/BoF strategy · Fri = Weekly Wins. All times EST.</p>
 
   <div class="info-box">
     <div class="info-label">Formula</div>
-    <div class="info-text"><strong>HOOK → VALUE → QUESTION</strong> on every post. Example: "I almost gave up on my first business because I couldn't validate my market fast enough… Here's the one framework that changed everything for me… What's the biggest challenge holding you back from launching right now?" More comments = more reach = more members.</div>
+    <div class="info-text"><strong>HOOK → VALUE → QUESTION</strong> on every post. Each post targets a specific stage (🚀 Launch · 📈 Scale · ⚙️ Optimize) and a funnel layer (ToF = pain hook/awareness · MoF = education/trust · BoF = soft CTA). Example: "I almost gave up on my first business because I couldn't validate my market fast enough… Here's the one framework that changed everything for me… What's the biggest challenge holding you back from launching right now?" More comments = more reach = more members.</div>
   </div>
 
   <div class="week-label"><span class="week-num">WEEK 1</span> Mar 23–27 · Webinar Week</div>
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 23</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">"Do You Have One More Mountain Left?" Reel — Energy over age. 45-day launch program. Last webinar soft CTA before tomorrow.</div>
       <div class="day-tag">Founder Stories</div>
@@ -884,6 +906,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 26</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">1:00 PM</div>
       <div class="day-post">"Most People Don't Know Which One They Are" — 5 business stages Reel (Self-Employed → Investor). "Know where you are."</div>
       <div class="day-tag">Founder Stories</div>
@@ -902,6 +925,7 @@
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 30</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">"Most founders don't fail because of a bad idea. They fail because they tried to run a business with no system." Hook → share a real example of structure vs. chaos → "What's the #1 bottleneck in your business right now?" No links.</div>
       <div class="day-tag">Founder Stories</div>
@@ -909,6 +933,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Tuesday <span style="color:var(--lime);font-size:10px;font-weight:600;">MAR 31</span></div>
+      <div class="day-stage"><span class="stage-sm scale">📈 Scale</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">12:00 PM</div>
       <div class="day-post">"Complexity is the Enemy of Scale" — too many disconnected tools (CRM, SaaS, Analytics, Email) hurt growth. Static graphic.</div>
       <div class="day-tag">Operations &amp; Systems</div>
@@ -917,12 +942,13 @@
     <div class="day-card">
       <div class="day-name">Wednesday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 1</span></div>
       <div class="day-time">9:00 AM</div>
-      <div class="day-post">Discussion: "What stage are you at right now — Launch, Scale or Optimize?" One question, no links, encourage long replies.</div>
-      <div class="day-tag">Ask the Community</div>
-      <div class="day-action">Pin temporarily</div>
+      <div class="day-post">Paul Hickey — Hickeyism video. Upload directly to group.</div>
+      <div class="day-tag">Business Launch Tips</div>
+      <div class="day-action">Upload to Group</div>
     </div>
     <div class="day-card">
       <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 2</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">1:00 PM</div>
       <div class="day-post">Startup Strategy — "The 3 systems every founder needs before scaling." Educational post or carousel. Hook → framework → question.</div>
       <div class="day-tag">Product &amp; Market Strategy</div>
@@ -931,9 +957,9 @@
     <div class="day-card">
       <div class="day-name">Friday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 3</span></div>
       <div class="day-time">10:00 AM</div>
-      <div class="day-post">"SMBs that automate operations report up to 58% higher revenue growth." Infographic + founder question in caption.</div>
-      <div class="day-tag">Operations &amp; Systems</div>
-      <div class="day-action">Share from Page</div>
+      <div class="day-post">Weekly Wins — "What moved the needle for you this week? Drop your win — big or small, it all counts."</div>
+      <div class="day-tag">Weekly Wins</div>
+      <div class="day-action">★ Feature</div>
     </div>
   </div>
 
@@ -941,6 +967,7 @@
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 6</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">Founder story — "You're not drowning, you're just getting wet." Relatable entrepreneur moment from the team. Hook → story → question.</div>
       <div class="day-tag">Founder Stories</div>
@@ -948,6 +975,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Tuesday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 7</span></div>
+      <div class="day-stage"><span class="stage-sm scale">📈 Scale</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">12:00 PM</div>
       <div class="day-post">Discussion: "What's the #1 tool that changed your business as a founder?" Tech tools for entrepreneurs. No links.</div>
       <div class="day-tag">Tech Tools for Startups</div>
@@ -962,6 +990,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 9</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">BoF</span></div>
       <div class="day-time">1:00 PM</div>
       <div class="day-post">Affiliate spotlight — Fund &amp; Grow: "How to access $50K–$250K in business funding without a traditional bank loan." Link in comments.</div>
       <div class="day-tag">Affiliate &amp; Partner Resources</div>
@@ -980,6 +1009,7 @@
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 13</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">"If it's not creating a customer, it's not an income-producing activity." IPA framework — hook → define what counts as an IPA → "What's your #1 income-producing activity this week?"</div>
       <div class="day-tag">Founder Stories</div>
@@ -987,6 +1017,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Tuesday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 14</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">12:00 PM</div>
       <div class="day-post">"The 5 things founders skip at launch — and why it costs them everything." Educational post or carousel. Each point tied to a StealthEnomics solution. Question at the end.</div>
       <div class="day-tag">Business Launch Tips</div>
@@ -1001,6 +1032,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 16</span></div>
+      <div class="day-stage"><span class="stage-sm scale">📈 Scale</span><span class="stage-sm funnel">BoF</span></div>
       <div class="day-time">1:00 PM</div>
       <div class="day-post">Strategy — "Why your business model matters more than your marketing." Christopher Bell III framework. Hook → insight → CTA to book a free vendor analysis.</div>
       <div class="day-tag">Product &amp; Market Strategy</div>
@@ -1019,6 +1051,7 @@
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 20</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">"Most people plan to start a business. Few actually do. Here's the difference — it's not money, it's not timing, it's not the idea." Hook → contrast planning vs. doing → "What's the real thing holding you back right now?"</div>
       <div class="day-tag">Founder Stories</div>
@@ -1026,6 +1059,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Tuesday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 21</span></div>
+      <div class="day-stage"><span class="stage-sm launch">🚀 Launch</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">12:00 PM</div>
       <div class="day-post">"How to validate your business idea in 5 days — before spending a dollar." Tactical post. Framework: Talk → Test → Measure → Decide. No links.</div>
       <div class="day-tag">Business Launch Tips</div>
@@ -1040,6 +1074,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Thursday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 23</span></div>
+      <div class="day-stage"><span class="stage-sm optimize">⚙️ Optimize</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">1:00 PM</div>
       <div class="day-post">Tech Acquisition — "The vendor selection mistake that costs businesses $20K+ a year." Hook → common trap → how the Complimentary Vendor Analysis works → CTA in comments.</div>
       <div class="day-tag">Tech Tools for Startups</div>
@@ -1058,6 +1093,7 @@
   <div class="week-grid">
     <div class="day-card">
       <div class="day-name">Monday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 27</span></div>
+      <div class="day-stage"><span class="stage-sm scale">📈 Scale</span><span class="stage-sm funnel">ToF</span></div>
       <div class="day-time">8:00 AM</div>
       <div class="day-post">"Entrepreneurship isn't about working harder. It's about working on the right things." Hook → contrast busy vs. productive → "What's one thing you need to STOP doing to move faster?"</div>
       <div class="day-tag">Founder Stories</div>
@@ -1065,6 +1101,7 @@
     </div>
     <div class="day-card">
       <div class="day-name">Tuesday <span style="color:var(--lime);font-size:10px;font-weight:600;">APR 28</span></div>
+      <div class="day-stage"><span class="stage-sm scale">📈 Scale</span><span class="stage-sm funnel">MoF</span></div>
       <div class="day-time">12:00 PM</div>
       <div class="day-post">"3 questions every founder must answer before spending money on marketing." Framework post. Hook → Q1: Do you have a repeatable offer? Q2: Do you know your customer? Q3: Can you deliver consistently?</div>
       <div class="day-tag">Product &amp; Market Strategy</div>
@@ -1104,11 +1141,11 @@
         <li><span class="task-freq">Daily 12PM</span>Engage with posts — respond to comments, ask follow-up questions</li>
         <li><span class="task-freq">Daily 6PM</span>Final moderation check — remove spam, flag for Karine's review</li>
         <li><span class="task-freq">Daily</span>Post or share a Story (quick tip, poll, behind-the-scenes)</li>
-        <li><span class="task-freq">Monday</span>Publish Monday Mindset post at 8 AM</li>
-        <li><span class="task-freq">Tuesday</span>Publish Tips &amp; Tactics post at 12 PM + Paul's video if available</li>
-        <li><span class="task-freq">Wednesday</span>Publish Discussion Day post at 9 AM</li>
-        <li><span class="task-freq">Thursday</span>Publish Startup Strategy post at 1 PM</li>
-        <li><span class="task-freq">Friday</span>Publish Weekly Wins post at 10 AM</li>
+        <li><span class="task-freq">Monday 8AM</span>Publish stage-targeted ToF post (pain hook + one question)</li>
+        <li><span class="task-freq">Tuesday 12PM</span>Publish MoF education post (framework/tips for the week's target stage)</li>
+        <li><span class="task-freq">Wednesday 9AM</span>Upload Paul's Hickeyism video directly to group</li>
+        <li><span class="task-freq">Thursday 1PM</span>Publish MoF/BoF strategic post (insight + soft CTA)</li>
+        <li><span class="task-freq">Friday 10AM</span>Publish Weekly Wins post</li>
         <li><span class="task-freq">Weekly Fri</span>Compile weekly metrics report (members, top posts, engagement, webinar registrations)</li>
         <li><span class="task-freq">Weekly Mon</span>Review content calendar with Karine</li>
         <li><span class="task-freq">Monthly</span>Update Featured section with most engaged posts</li>
