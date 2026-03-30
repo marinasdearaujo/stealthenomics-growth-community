@@ -393,6 +393,46 @@
     font-weight: 500;
   }
 
+  /* COMMENT FIELD */
+  .day-comment {
+    margin-top: 10px;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    padding-top: 8px;
+  }
+  .day-comment-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 4px;
+  }
+  .day-comment textarea {
+    width: 100%;
+    min-height: 48px;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    padding: 8px 10px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .day-comment textarea::placeholder {
+    color: rgba(255,255,255,0.25);
+    font-style: italic;
+  }
+  .day-comment textarea:focus {
+    border-color: var(--lime);
+  }
+  .day-comment textarea.has-content {
+    border-color: rgba(179,194,52,0.4);
+    background: rgba(179,194,52,0.05);
+  }
+
   .week-label {
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
@@ -1545,8 +1585,43 @@
 
 
   // ── INIT ────────────────────────────────────────────────────
+  // ── COMMENT FIELDS ON DAY CARDS ─────────────────────────────
+  function initDayComments() {
+    document.querySelectorAll('.day-card').forEach((card, i) => {
+      const dateEl = card.querySelector('.day-name');
+      const key = 'comment_' + (dateEl ? dateEl.textContent.trim().replace(/\s+/g,'_') : 'card_' + i);
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'day-comment';
+
+      const label = document.createElement('div');
+      label.className = 'day-comment-label';
+      label.textContent = 'Feedback';
+
+      const textarea = document.createElement('textarea');
+      textarea.placeholder = 'Add feedback here...';
+      textarea.spellcheck = false;
+
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        textarea.value = saved;
+        textarea.classList.add('has-content');
+      }
+
+      textarea.addEventListener('input', function() {
+        localStorage.setItem(key, this.value);
+        this.classList.toggle('has-content', this.value.trim().length > 0);
+      });
+
+      wrapper.appendChild(label);
+      wrapper.appendChild(textarea);
+      card.appendChild(wrapper);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     migrateLocalStorage();
+    initDayComments();
     TABLE_IDS.forEach(initTable);
     updateCounts();
     // Facebook members (if configured)
