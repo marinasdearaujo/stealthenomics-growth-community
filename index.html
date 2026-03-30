@@ -393,23 +393,96 @@
     font-weight: 500;
   }
 
-  /* COMMENT FIELD */
-  .day-comment {
+  /* COMMENT THREAD */
+  .comment-section {
     margin-top: 10px;
     border-top: 1px dashed rgba(255,255,255,0.1);
     padding-top: 8px;
   }
-  .day-comment-label {
-    font-size: 10px;
+  .comment-toggle {
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: var(--mid-blue);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    user-select: none;
+  }
+  .comment-toggle:hover { color: var(--lime); }
+  .comment-toggle .count {
+    background: var(--blue);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 1px 6px;
+    border-radius: 8px;
+    min-width: 16px;
+    text-align: center;
+  }
+  .comment-thread { display: none; margin-top: 8px; }
+  .comment-thread.open { display: block; }
+
+  /* Single comment */
+  .comment-item {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+  }
+  .comment-item.reply {
+    margin-left: 20px;
+    border-left: 2px solid var(--blue);
+  }
+  .comment-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 4px;
   }
-  .day-comment textarea {
-    width: 100%;
-    min-height: 48px;
+  .comment-author {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--lime);
+  }
+  .comment-time {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+  }
+  .comment-body {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.8);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .comment-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .comment-actions button {
+    background: none;
+    border: none;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    cursor: pointer;
+    padding: 0;
+  }
+  .comment-actions button:hover { color: var(--lime); }
+
+  /* Compose area */
+  .comment-compose {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .comment-compose textarea {
+    flex: 1;
+    min-height: 36px;
+    max-height: 120px;
     background: rgba(0,0,0,0.25);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 6px;
@@ -419,18 +492,115 @@
     padding: 8px 10px;
     resize: vertical;
     outline: none;
-    transition: border-color 0.2s;
   }
-  .day-comment textarea::placeholder {
+  .comment-compose textarea::placeholder {
     color: rgba(255,255,255,0.25);
     font-style: italic;
   }
-  .day-comment textarea:focus {
-    border-color: var(--lime);
+  .comment-compose textarea:focus { border-color: var(--lime); }
+  .comment-compose .btn-post {
+    background: var(--lime);
+    color: var(--navy);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    align-self: flex-end;
+    white-space: nowrap;
   }
-  .day-comment textarea.has-content {
-    border-color: rgba(179,194,52,0.4);
-    background: rgba(179,194,52,0.05);
+  .comment-compose .btn-post:hover { background: var(--lime2); }
+
+  /* Edit mode */
+  .comment-edit-area {
+    display: flex;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .comment-edit-area textarea {
+    flex: 1;
+    min-height: 32px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--lime);
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    padding: 6px 8px;
+    resize: vertical;
+    outline: none;
+  }
+  .comment-edit-area button {
+    background: var(--lime);
+    color: var(--navy);
+    border: none;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+  }
+  .comment-edit-area .btn-cancel {
+    background: transparent;
+    color: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* Name prompt */
+  .name-prompt {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .name-prompt-box {
+    background: var(--navy2);
+    border: 1px solid var(--blue);
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-align: center;
+    max-width: 340px;
+  }
+  .name-prompt-box h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .name-prompt-box p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
+  }
+  .name-prompt-box input {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 12px;
+    outline: none;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .name-prompt-box input:focus { border-color: var(--lime); }
+  .name-prompt-box button {
+    background: var(--lime);
+    color: var(--navy);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 10px 28px;
+    border-radius: 6px;
+    cursor: pointer;
   }
 
   .week-label {
@@ -1585,37 +1755,220 @@
 
 
   // ── INIT ────────────────────────────────────────────────────
-  // ── COMMENT FIELDS ON DAY CARDS ─────────────────────────────
+  // ── THREADED COMMENTS ON DAY CARDS ──────────────────────────
+  let commentUser = localStorage.getItem('comment_username') || '';
+
+  function ensureUsername() {
+    return new Promise(resolve => {
+      if (commentUser) return resolve(commentUser);
+      const overlay = document.createElement('div');
+      overlay.className = 'name-prompt';
+      overlay.innerHTML = `<div class="name-prompt-box">
+        <h3>What's your name?</h3>
+        <p>This will appear on your comments</p>
+        <input type="text" id="nameInput" placeholder="e.g. Karine" autofocus />
+        <button id="nameBtn">Continue</button>
+      </div>`;
+      document.body.appendChild(overlay);
+      const inp = overlay.querySelector('#nameInput');
+      const btn = overlay.querySelector('#nameBtn');
+      function submit() {
+        const name = inp.value.trim();
+        if (!name) return inp.focus();
+        commentUser = name;
+        localStorage.setItem('comment_username', name);
+        overlay.remove();
+        resolve(name);
+      }
+      btn.addEventListener('click', submit);
+      inp.addEventListener('keydown', e => { if (e.key === 'Enter') submit(); });
+    });
+  }
+
+  function getComments(key) {
+    try { return JSON.parse(localStorage.getItem('comments_' + key)) || []; }
+    catch { return []; }
+  }
+  function saveComments(key, data) {
+    localStorage.setItem('comments_' + key, JSON.stringify(data));
+  }
+
+  function renderComment(c, key, idx, threadEl, parentIdx) {
+    const div = document.createElement('div');
+    div.className = 'comment-item' + (parentIdx !== undefined ? ' reply' : '');
+    div.innerHTML = `
+      <div class="comment-meta">
+        <span class="comment-author">${esc(c.author)}</span>
+        <span class="comment-time">${c.time}</span>
+      </div>
+      <div class="comment-body">${esc(c.text)}</div>
+      <div class="comment-actions">
+        <button class="btn-edit">Edit</button>
+        <button class="btn-reply">Reply</button>
+        <button class="btn-delete">Delete</button>
+      </div>`;
+
+    div.querySelector('.btn-edit').addEventListener('click', () => startEdit(div, c, key, idx, parentIdx));
+    div.querySelector('.btn-reply').addEventListener('click', () => startReply(div, key, idx));
+    div.querySelector('.btn-delete').addEventListener('click', () => {
+      if (!confirm('Delete this comment?')) return;
+      const data = getComments(key);
+      if (parentIdx !== undefined) {
+        data[parentIdx].replies.splice(data[parentIdx].replies.indexOf(c), 1);
+      } else {
+        data.splice(idx, 1);
+      }
+      saveComments(key, data);
+      rebuildThread(key, threadEl);
+    });
+
+    threadEl.appendChild(div);
+
+    if (c.replies) {
+      c.replies.forEach((r, ri) => renderComment(r, key, ri, threadEl, idx));
+    }
+  }
+
+  function startEdit(div, c, key, idx, parentIdx) {
+    const bodyEl = div.querySelector('.comment-body');
+    const actionsEl = div.querySelector('.comment-actions');
+    bodyEl.style.display = 'none';
+    actionsEl.style.display = 'none';
+
+    const area = document.createElement('div');
+    area.className = 'comment-edit-area';
+    area.innerHTML = `<textarea>${esc(c.text)}</textarea><button class="btn-save">Save</button><button class="btn-cancel">Cancel</button>`;
+    div.appendChild(area);
+    const ta = area.querySelector('textarea');
+    ta.focus();
+    ta.setSelectionRange(ta.value.length, ta.value.length);
+
+    area.querySelector('.btn-cancel').addEventListener('click', () => {
+      area.remove();
+      bodyEl.style.display = '';
+      actionsEl.style.display = '';
+    });
+    area.querySelector('.btn-save').addEventListener('click', () => {
+      const newText = ta.value.trim();
+      if (!newText) return;
+      const data = getComments(key);
+      if (parentIdx !== undefined) {
+        data[parentIdx].replies[idx].text = newText;
+        data[parentIdx].replies[idx].edited = true;
+      } else {
+        data[idx].text = newText;
+        data[idx].edited = true;
+      }
+      saveComments(key, data);
+      bodyEl.textContent = newText;
+      area.remove();
+      bodyEl.style.display = '';
+      actionsEl.style.display = '';
+    });
+  }
+
+  function startReply(div, key, parentIdx) {
+    if (div.querySelector('.comment-compose')) return;
+    const compose = document.createElement('div');
+    compose.className = 'comment-compose';
+    compose.style.marginTop = '6px';
+    compose.innerHTML = `<textarea placeholder="Write a reply..."></textarea><button class="btn-post">Reply</button>`;
+    div.appendChild(compose);
+    const ta = compose.querySelector('textarea');
+    ta.focus();
+
+    compose.querySelector('.btn-post').addEventListener('click', async () => {
+      const text = ta.value.trim();
+      if (!text) return;
+      const author = await ensureUsername();
+      const data = getComments(key);
+      if (!data[parentIdx].replies) data[parentIdx].replies = [];
+      data[parentIdx].replies.push({
+        author, text,
+        time: new Date().toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
+      });
+      saveComments(key, data);
+      const threadEl = div.closest('.comment-thread');
+      rebuildThread(key, threadEl);
+      updateToggleCount(threadEl);
+    });
+  }
+
+  function rebuildThread(key, threadEl) {
+    const compose = threadEl.querySelector(':scope > .comment-compose');
+    threadEl.querySelectorAll('.comment-item').forEach(el => el.remove());
+    const data = getComments(key);
+    data.forEach((c, i) => renderComment(c, key, i, threadEl));
+    if (compose) threadEl.appendChild(compose);
+  }
+
+  function updateToggleCount(threadEl) {
+    const section = threadEl.closest('.comment-section');
+    const toggle = section.querySelector('.comment-toggle');
+    const key = threadEl.dataset.key;
+    const data = getComments(key);
+    const total = data.reduce((n, c) => n + 1 + (c.replies ? c.replies.length : 0), 0);
+    const countEl = toggle.querySelector('.count');
+    countEl.textContent = total;
+    countEl.style.display = total > 0 ? '' : 'none';
+  }
+
+  function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
   function initDayComments() {
     document.querySelectorAll('.day-card').forEach((card, i) => {
       const dateEl = card.querySelector('.day-name');
-      const key = 'comment_' + (dateEl ? dateEl.textContent.trim().replace(/\s+/g,'_') : 'card_' + i);
+      const key = dateEl ? dateEl.textContent.trim().replace(/\s+/g,'_') : 'card_' + i;
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'day-comment';
+      const section = document.createElement('div');
+      section.className = 'comment-section';
 
-      const label = document.createElement('div');
-      label.className = 'day-comment-label';
-      label.textContent = 'Feedback';
+      const data = getComments(key);
+      const total = data.reduce((n, c) => n + 1 + (c.replies ? c.replies.length : 0), 0);
 
-      const textarea = document.createElement('textarea');
-      textarea.placeholder = 'Add feedback here...';
-      textarea.spellcheck = false;
+      const toggle = document.createElement('div');
+      toggle.className = 'comment-toggle';
+      toggle.innerHTML = `💬 Feedback <span class="count" style="${total > 0 ? '' : 'display:none'}">${total}</span>`;
 
-      const saved = localStorage.getItem(key);
-      if (saved) {
-        textarea.value = saved;
-        textarea.classList.add('has-content');
-      }
+      const thread = document.createElement('div');
+      thread.className = 'comment-thread';
+      thread.dataset.key = key;
 
-      textarea.addEventListener('input', function() {
-        localStorage.setItem(key, this.value);
-        this.classList.toggle('has-content', this.value.trim().length > 0);
+      data.forEach((c, ci) => renderComment(c, key, ci, thread));
+
+      const compose = document.createElement('div');
+      compose.className = 'comment-compose';
+      compose.innerHTML = `<textarea placeholder="Add feedback..."></textarea><button class="btn-post">Post</button>`;
+
+      compose.querySelector('.btn-post').addEventListener('click', async () => {
+        const ta = compose.querySelector('textarea');
+        const text = ta.value.trim();
+        if (!text) return;
+        const author = await ensureUsername();
+        const d = getComments(key);
+        d.push({
+          author, text, replies: [],
+          time: new Date().toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' })
+        });
+        saveComments(key, d);
+        ta.value = '';
+        rebuildThread(key, thread);
+        updateToggleCount(thread);
       });
 
-      wrapper.appendChild(label);
-      wrapper.appendChild(textarea);
-      card.appendChild(wrapper);
+      compose.querySelector('textarea').addEventListener('keydown', e => {
+        if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+          compose.querySelector('.btn-post').click();
+        }
+      });
+
+      thread.appendChild(compose);
+
+      toggle.addEventListener('click', () => thread.classList.toggle('open'));
+
+      section.appendChild(toggle);
+      section.appendChild(thread);
+      card.appendChild(section);
     });
   }
 
